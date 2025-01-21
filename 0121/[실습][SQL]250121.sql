@@ -25,6 +25,7 @@ SELECT
 FROM LOANS
 WHERE STATUS = 'APPROVED';
 
+
 -- 4.계좌 테이블에서 고객별 평균 잔액을 계산하시오.
 SELECT
     DISTINCT CUSTOMER_ID,
