@@ -61,3 +61,66 @@ FROM
 START WITH MANAGER_ID IS NULL
 CONNECT BY PRIOR EMPLOYEE_ID = MANAGER_ID
 ;
+
+
+--6. 직무별, 지역별 대출 금액 합계 조회
+--대출 테이블에서 직무별, 지점별 대출 금액 합계를 계산하고 모든 조합, 즉 다차원 집계를 표시하세요.
+SELECT
+    E.JOB_ID, L.BRANCH_ID, SUM(L.AMOUNT)
+FROM EMPLOYEES E, LOANS L
+WHERE E.EMPLOYEE_ID = L.CUSTOMER_ID
+GROUP BY CUBE(E.JOB_ID, L.BRANCH_ID)
+ORDER BY E.JOB_ID, L.BRANCH_ID
+;
+
+
+-- 7. 직원 급여 통계 요약(GROUPING SETS)
+-- 사원 테이블에서 전체 급여 합계, 부서별 급여 합계, 직무별 급여 합계를 각각 표시하세요.
+SELECT
+    DEPARTMENT_ID, JOB_ID, SUM(SALARY)
+FROM EMPLOYEES
+GROUP BY GROUPING SETS(DEPARTMENT_ID, JOB_ID)
+ORDER BY JOB_ID NULLS FIRST, DEPARTMENT_ID NULLS FIRST
+;
+
+--8. 대출 통계 요약
+--대출 테이블에서 지점별, 대출 상태별 금액 합계를 계산하고
+--각 지점별 소계와 전체 합계를 표시하세요. 단, 지점별 소계를
+--나타내는 행은 상태값 컬럼에 ‘==========’ 표시를 해주고 총계는 ‘Total’로 표시합니다.
+SELECT
+    NVL(TO_CHAR(BRANCH_ID),'TOTAL') BRANCH_ID,
+    NVL(STATUS, '==========') STATUS,
+    SUM(AMOUNT)
+FROM LOANS
+GROUP BY ROLLUP(BRANCH_ID, STATUS)
+ORDER BY BRANCH_ID, STATUS DESC
+;
+
+--9. 계층별 직원 수 조회
+--직원의 계층 구조를 생성하고 각 계층별 직원의 수를 출력하세요.
+SELECT
+    LEVEL,
+    COUNT(*) CNT
+FROM EMPLOYEES
+START WITH MANAGER_ID IS NULL
+CONNECT BY PRIOR EMPLOYEE_ID = MANAGER_ID
+GROUP BY LEVEL
+;
+
+--10. 고객별, 대출 상태별 대출 금액
+--고객별, 대출 상태별 대출 금액과 고객별 대출 금액 소계, 그리고 전체 대출 금액 합계를 구하세요.
+--출력 컬럼은 고객 이름, 대출 상태, 대출 금액입니다. 고객별 대출 금액 소계는 ‘All Status’로 표시하고 전체 대출 금액 합계는 Total로 표시해 주세요.
+SELECT
+    NVL2(CUSTOMER_ID,
+        (SELECT NAME FROM CUSTOMERS C WHERE C.CUSTOMER_ID = L.CUSTOMER_ID),
+        'Total') AS CUSTOMER_ID,
+    CASE
+        WHEN GROUPING(STATUS)=1 AND GROUPING(CUSTOMER_ID)=0 THEN 'All Status'
+        WHEN GROUPING(STATUS)=1 AND GROUPING(CUSTOMER_ID)=1 THEN 'Total'
+        ELSE STATUS
+    END AS STATUS_,
+    SUM(AMOUNT) SUM_AMOUNT
+FROM LOANS L
+GROUP BY ROLLUP(CUSTOMER_ID, STATUS)
+ORDER BY CUSTOMER_ID, STATUS NULLS LAST
+;
