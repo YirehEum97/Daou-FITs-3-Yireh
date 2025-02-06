@@ -19,4 +19,21 @@ public class Student extends Human{
     public String printInformation(){
         return super.printInformation() + "\t" + number + "\t" + major;
     }
+
+    // getters, setters
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 }
