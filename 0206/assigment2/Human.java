@@ -18,6 +18,6 @@ public class Human {
     }
 
     public String printInformation(){
-        return name + "\t" + age + "\t" + height + "\t" + weight;
+        return this.name + "\t" + this.age + "\t" + this.height + "\t" + this.weight;
     }
 }

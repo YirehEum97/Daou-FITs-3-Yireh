@@ -17,12 +17,12 @@ public class Student extends Human{
 
     @Override
     public String printInformation(){
-        return super.printInformation() + "\t" + number + "\t" + major;
+        return super.printInformation() + "\t" + this.number + "\t" + this.major;
     }
 
     // getters, setters
     public String getNumber() {
-        return number;
+        return this.number;
     }
 
     public void setNumber(String number) {
@@ -30,7 +30,7 @@ public class Student extends Human{
     }
 
     public String getMajor() {
-        return major;
+        return this.major;
     }
 
     public void setMajor(String major) {

@@ -1,20 +1,20 @@
 package assigment2;
 
-public class TvTest extends TV{
+public class TvTest extends Tv {
 
     public static void main(String[] args) {
-        TV tvArray [] = new TV[3];
-        tvArray[0] = new TV("INFINIA", 1500000, "LED TV");
-        tvArray[1] = new TV("XCANVAS", 1000000, "LCD TV");
-        tvArray[2] = new TV("CINEMA", 2000000, "3D TV");
+        Tv[] tvArray = {
+            new Tv("INFINIA", 1500000, "LED TV"),
+            new Tv("XCANVAS", 1000000, "LCD TV"),
+            new Tv("CINEMA", 2000000, "3D TV")
+        };
 
-
-        for (TV tv : tvArray) {
-            System.out.println(tv.toString());
+        for (Tv tv : tvArray) {
+            System.out.println(tv);
         }
 
         int sum = 0;
-        for (TV tv : tvArray) {
+        for (Tv tv : tvArray) {
             sum += tv.getPrice();
         }
 
