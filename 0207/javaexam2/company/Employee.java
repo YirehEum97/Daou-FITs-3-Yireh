@@ -20,7 +20,7 @@ public abstract class Employee {
     public abstract double tax();
 
     public String getName(){
-        return name;
+        return this.name;
     }
 
     public void setName(String name){
@@ -28,7 +28,7 @@ public abstract class Employee {
     }
 
     public int getNumber(){
-        return number;
+        return this.number;
     }
 
     public void setNumber(int number){
@@ -36,7 +36,7 @@ public abstract class Employee {
     }
 
     public String getDepartment(){
-        return department;
+        return this.department;
     }
 
     public void setDepartment(String department){
@@ -44,14 +44,16 @@ public abstract class Employee {
     }
 
     public int getSalary(){
-        return salary;
+        return this.salary;
     }
 
     public void setSalary(int salary){
         this.salary = salary;
     }
 
-    public void printValues(){
-        System.out.println(name+"\t"+department+"\t"+salary);
+    @Override
+    public String toString(){
+        String str = String.format("%-10s%-12s%-10s",name,department,salary);
+        return str;
     }
 }

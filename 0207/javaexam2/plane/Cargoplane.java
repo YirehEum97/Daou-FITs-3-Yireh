@@ -11,6 +11,6 @@ public class Cargoplane extends Plane{
 
     @Override
     public void flight(int distance){
-        fuelSize -= distance * 5;
+        this.setFuelSize(this.getFuelSize() - distance * 5);
     }
 }

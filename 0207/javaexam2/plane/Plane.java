@@ -1,8 +1,8 @@
 package javaexam2.plane;
 
 public abstract class Plane {
-    String planeName;
-    int fuelSize;
+    private String planeName;
+    private int fuelSize;
 
     public Plane(){
 
@@ -20,6 +20,22 @@ public abstract class Plane {
     public abstract void flight(int distance);
 
     public void printValue(){
-        System.out.println(planeName+"\t"+fuelSize);
+        System.out.printf("%-8s%s\n",planeName,fuelSize);
+    }
+
+    public String getPlaneName(){
+        return this.planeName;
+    }
+
+    public void setPlaneName(String planeName){
+        this.planeName = planeName;
+    }
+
+    public int getFuelSize(){
+        return this.fuelSize;
+    }
+
+    public void setFuelSize(int fuelSize){
+        this.fuelSize = fuelSize;
     }
 }

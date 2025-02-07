@@ -4,7 +4,7 @@ public class PlaneTest {
     public static void main(String[] args) {
         Plane[] planes = {
             new Airplane("L747", 1000),
-            new Cargoplane("C40 ", 1000)
+            new Cargoplane("C40", 1000)
         };
 
         String divider = "Plane\tfuelSize\n-------------------";
