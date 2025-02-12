@@ -1,7 +1,6 @@
 package booksearchmvc.dao;
 
 import booksearchmvc.vo.BookVO;
-import di.step6.ConnectionMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

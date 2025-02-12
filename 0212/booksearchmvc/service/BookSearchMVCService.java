@@ -1,9 +1,9 @@
 package booksearchmvc.service;
 
 import booksearchmvc.dao.BookDAO;
+import booksearchmvc.dao.ConnectionMaker;
+import booksearchmvc.dao.KConnectionMaker;
 import booksearchmvc.vo.BookVO;
-import di.step6.ConnectionMaker;
-import di.step6.KConnectionMaker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
