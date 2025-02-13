@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    <!-- JDBC Driver 클래스와 데이터베이스 연결 설정-->
+    <!-- 보안을 위해 이 연결 성정에 대한 내용은 XML 안에 직접 작성하지 않고
+    별도의 외부 파일에 작성해 property로 가져와서 사용-->
+    <properties resource="driver.properties"/>
+    
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Book" type="example.vo.BookVO"/>
+    </typeAliases>
+
+    <!-- DB 연결 정보 -->
+    <!-- transaction manager를 JDBC로 설정하면 수동으로 transaction을 설정한다는 의미
+         type이 MANAGED면 자동으로 transaction을 제어-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${db.driver}"/>
+                <property name="url" value="${db.url}"/>
+                <property name="username" value="${db.username}"/>
+                <property name="password" value="${db.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- SQL 구문을 작성하는 mapper라는 XML파일의 경로를 지정-->
+    <mappers>
+        <mapper resource="./sqlmap/Book.xml"/>
+    </mappers>
+
+</configuration>
