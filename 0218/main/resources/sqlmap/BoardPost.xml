@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+    <insert id="insertPost" parameterType="BoardPost">
+        <![CDATA[
+        INSERT INTO BULLETIN (bid, title, content, user_id, regDate)
+        VALUES (emp_seq.NEXTVAL, #{title}, #{content}, #{author}, #{regDate})
+        ]]>
+    </insert>
+
+    <select id="selectAllPosts" resultType="BoardPost">
+     <![CDATA[
+        SELECT bid, user_id, btitle, regDate
+        FROM BULLETIN
+        ORDER BY id DESC
+        ]]>
+    </select>
+</mapper>
